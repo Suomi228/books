@@ -1,4 +1,4 @@
-package entities;
+package com.example.books.entities;
 
 import jakarta.persistence.*;
 
@@ -12,10 +12,21 @@ public class BookEntity {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
-    private String author;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private AuthorEntity author;
 
-    public BookEntity(Long id, String title, String author, GenreEntity genre, String description, double price) {
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
+    private GenreEntity genre;
+
+    @Column(nullable = false, length = 1000)
+    private String description;
+
+    @Column(nullable = false)
+    private double price;
+
+    public BookEntity(Long id, String title, AuthorEntity author, GenreEntity genre, String description, double price) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -44,11 +55,11 @@ public class BookEntity {
         this.title = title;
     }
 
-    public String getAuthor() {
+    public AuthorEntity getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(AuthorEntity author) {
         this.author = author;
     }
 
@@ -76,13 +87,5 @@ public class BookEntity {
         this.price = price;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "genre_id")
-    private GenreEntity genre;
 
-    @Column(nullable = false, length = 1000)
-    private String description;
-
-    @Column(nullable = false)
-    private double price;
 }
