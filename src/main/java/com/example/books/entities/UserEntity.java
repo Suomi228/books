@@ -12,7 +12,7 @@ public class UserEntity extends BaseEntity {
     private String name;
     private String password;
 
-    public UserEntity(String email, String name, String password) {
+    protected UserEntity(String email, String name, String password) {
         this.email = email;
         this.name = name;
         this.password = password;

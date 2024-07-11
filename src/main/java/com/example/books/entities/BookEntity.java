@@ -8,13 +8,13 @@ public class BookEntity extends BaseEntity{
     private String description;
     private double price;
 
-    public BookEntity(String title, String description, double price) {
+    protected BookEntity(String title, String description, double price) {
         this.title = title;
         this.description = description;
         this.price = price;
     }
 
-    public BookEntity() {
+    protected BookEntity() {
 
     }
     @Column(name = "title")
