@@ -11,6 +11,9 @@ public class UserEntity extends BaseEntity {
     private String email;
     private String name;
     private String password;
+    private Set<BookCollectionEntity> bookCollections;
+    private Set<PurchaseEntity> purchaseEntities;
+
 
     protected UserEntity(String email, String name, String password) {
         this.email = email;
@@ -45,5 +48,23 @@ public class UserEntity extends BaseEntity {
     @Column(name="name", unique = true)
     public String getName() {
         return name;
+    }
+
+    @OneToMany(mappedBy = "user",targetEntity = PurchaseEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public Set<PurchaseEntity> getPurchaseEntities() {
+        return purchaseEntities;
+    }
+
+    public void setPurchaseEntities(Set<PurchaseEntity> purchaseEntities) {
+        this.purchaseEntities = purchaseEntities;
+    }
+
+    @OneToMany(mappedBy = "user",targetEntity = BookCollectionEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public Set<BookCollectionEntity> getBookCollections() {
+        return bookCollections;
+    }
+
+    public void setBookCollections(Set<BookCollectionEntity> bookCollections) {
+        this.bookCollections = bookCollections;
     }
 }
