@@ -8,12 +8,14 @@ public class BookEntity extends BaseEntity{
     private String description;
     private double price;
     private GenreEntity genre;
+    private AuthorEntity author;
 
-    protected BookEntity(String title, String description, double price, GenreEntity genre) {
+    protected BookEntity(String title, String description, double price, GenreEntity genre, AuthorEntity author) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.genre = genre;
+        this.author = author;
     }
 
     protected BookEntity() {
@@ -51,5 +53,14 @@ public class BookEntity extends BaseEntity{
 
     public void setGenre(GenreEntity genre) {
         this.genre = genre;
+    }
+    @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false)
+    public AuthorEntity getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(AuthorEntity author) {
+        this.author = author;
     }
 }
