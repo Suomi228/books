@@ -50,7 +50,12 @@ public class UserEntity extends BaseEntity {
         return name;
     }
 
-    @OneToMany(mappedBy = "user",targetEntity = PurchaseEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "purchase",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
     public Set<PurchaseEntity> getPurchaseEntities() {
         return purchaseEntities;
     }
@@ -59,7 +64,12 @@ public class UserEntity extends BaseEntity {
         this.purchaseEntities = purchaseEntities;
     }
 
-    @OneToMany(mappedBy = "user",targetEntity = BookCollectionEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "book_collection",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
     public Set<BookCollectionEntity> getBookCollections() {
         return bookCollections;
     }
