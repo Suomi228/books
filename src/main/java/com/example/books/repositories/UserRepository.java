@@ -13,7 +13,7 @@ public interface UserRepository{
 
 
 //     Show every book that user liked
-    @Query(value = "select u, b.book from UserEntity u join BookCollectionEntity b on u.id = b.id where u.name in :name")
-    List<UserEntity> findAllByName(String name);
+    @Query(value = "select u, b.book from UserEntity u join BookCollectionEntity b on u.id = b.user.id where u.name in (:name)")
+    List<UserEntity> findAllByName(@Param("name") String name);
 
 }
