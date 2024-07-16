@@ -11,5 +11,4 @@ public abstract class GenericRepository<T, ID> implements JpaRepository<T, Long>
 
     public abstract List<T> findAllByName(String name);
 
-
 }

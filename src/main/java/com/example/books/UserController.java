@@ -4,10 +4,7 @@ import com.example.books.entities.UserEntity;
 import com.example.books.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @AutoConfiguration
@@ -17,8 +14,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/search")
-    public List<UserEntity> getAll(@RequestParam String name) {
+    @GetMapping("/search/{name}")
+    public List<UserEntity> getAll(@PathVariable("name") String name) {
         return userService.findAllByName(name);
     }
 }
