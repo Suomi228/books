@@ -27,7 +27,11 @@ public class BookDiscountService implements BookDiscount {
     public List<BookDTO> findDiscountEligibleBooks(Long userId) {
         List<BookEntity> eligibleBooks = userRepository.findDiscountEligibleBooks(userId);
         return eligibleBooks.stream()
-                .map(book -> modelMapper.map(book, BookDTO.class))
+                .map(book -> {
+                    BookDTO bookDTO = modelMapper.map(book, BookDTO.class);
+                    bookDTO.setPrice(book.getPrice() * 0.75); // Применение 25% скидки
+                    return bookDTO;
+                })
                 .collect(Collectors.toList());
     }
 }
