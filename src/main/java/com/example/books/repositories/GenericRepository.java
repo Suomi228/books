@@ -1,14 +1,21 @@
 package com.example.books.repositories;
 
-import com.example.books.entities.UserEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import java.io.Serializable;
-import java.util.List;
-@Repository
-public abstract class GenericRepository<T, ID> implements JpaRepository<T, Long> {
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.Repository;
 
-    public abstract List<T> findAllByName(String name);
+@NoRepositoryBean
+public interface GenericRepository<T, ID> extends Repository<T, ID> {
 
+    <S extends T> S save(S entity);
+
+    <S extends T> Iterable<S> saveAll(Iterable<S> entities);
+
+    Iterable<T> findAll();
+
+    Iterable<T> findAllById(Iterable<ID> ids);
+
+    T findById(ID id);
+
+    boolean existsById(ID id);
 }
