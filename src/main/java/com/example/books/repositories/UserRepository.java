@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.awt.print.Pageable;
 import java.util.List;
 
 @Repository
@@ -19,6 +18,6 @@ public interface UserRepository extends GenericRepository<UserEntity, Long> {
             "(SELECT bc.book.genre FROM BookCollectionEntity bc WHERE bc.user.id = :userId) " +
             "AND b NOT IN (SELECT bc.book FROM BookCollectionEntity bc WHERE bc.user.id = :userId) " +
             "ORDER BY b.id")
-    List<BookEntity> recommendBooks(@Param("userId") Long userId);
+    List<String> recommendBooks(@Param("userId") Long userId);
 
 }

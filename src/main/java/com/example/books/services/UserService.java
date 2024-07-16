@@ -28,10 +28,8 @@ public class UserService implements BookRecommendationService {
     }
 
     @Override
-    public List<BookDTO> recommendBooks(Long userId) {
-        List<BookEntity> recommendedBooks = userRepository.recommendBooks(userId);
-        return recommendedBooks.stream()
-                .map(book -> modelMapper.map(book, BookDTO.class))
-                .collect(Collectors.toList());
+    public List<String> recommendBooks(Long userId) {
+        List<String> recommendedBooks = userRepository.recommendBooks(userId);
+        return recommendedBooks;
     }
 }

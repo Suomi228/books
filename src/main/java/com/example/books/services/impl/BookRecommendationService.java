@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface BookRecommendationService {
 
-    List<BookDTO> recommendBooks(Long userId);
+    List<String> recommendBooks(Long userId);
 }

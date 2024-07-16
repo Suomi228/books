@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @GetMapping("/search/{userID}")
-    public List<BookDTO> getAll(@PathVariable("userID") Long userID) {
+    public List<String> getAll(@PathVariable("userID") Long userID) {
         return userService.recommendBooks(userID);
     }
 }
