@@ -10,8 +10,8 @@ public class UserDTO {
     private String email;
     private String name;
     private String password;
-    private Set<BookCollectionEntity> bookCollections;
-    private Set<PurchaseEntity> purchaseEntities;
+    private Set<BookCollectionDTO> bookCollections;
+    private Set<PurchaseDTO> purchaseEntities;
 
 
     protected UserDTO(long id, String email, String name, String password) {
@@ -57,19 +57,19 @@ public class UserDTO {
         this.password = password;
     }
 
-    public Set<BookCollectionEntity> getBookCollections() {
+    public Set<BookCollectionDTO> getBookCollections() {
         return bookCollections;
     }
 
-    public void setBookCollections(Set<BookCollectionEntity> bookCollections) {
+    public void setBookCollections(Set<BookCollectionDTO> bookCollections) {
         this.bookCollections = bookCollections;
     }
 
-    public Set<PurchaseEntity> getPurchaseEntities() {
+    public Set<PurchaseDTO> getPurchaseEntities() {
         return purchaseEntities;
     }
 
-    public void setPurchaseEntities(Set<PurchaseEntity> purchaseEntities) {
+    public void setPurchaseEntities(Set<PurchaseDTO> purchaseEntities) {
         this.purchaseEntities = purchaseEntities;
     }
 }

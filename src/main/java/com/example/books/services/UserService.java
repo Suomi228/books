@@ -1,23 +1,22 @@
 package com.example.books.services;
 
 
-import com.example.books.DTO.UserDTO;
-import com.example.books.entities.UserEntity;
+import com.example.books.DTO.BookDTO;
+import com.example.books.entities.BookEntity;
 import com.example.books.repositories.UserRepository;
 //import com.example.books.repositories.impl.UserEntityRepositoryImpl;
-import jakarta.persistence.EntityNotFoundException;
+import com.example.books.services.impl.BookRecommendationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements BookRecommendationService{
+public class UserService implements BookRecommendationService {
 
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
@@ -28,19 +27,11 @@ public class UserService implements BookRecommendationService{
         this.userRepository = userRepository;
     }
 
-
-    public List<UserEntity> findAllByName(String name){
-        List<UserEntity> users = userRepository.findAllByName(name);
-        System.out.println(users);
-        return userRepository.findAllByName(name);
-    };
-
     @Override
-    public List<UserDTO> recommendBooks(UserDTO userDTO) {
-        List<UserEntity> users = userRepository.findAllByName(userDTO.getName());
-        List<UserDTO> userDTOs = users.stream()
-                .map(userEntity -> modelMapper.map(userEntity, UserDTO.class))
-                .collect(Collectors.toList());;
-        return userDTOs;
+    public List<BookDTO> recommendBooks(Long userId) {
+        List<BookEntity> recommendedBooks = userRepository.recommendBooks(userId);
+        return recommendedBooks.stream()
+                .map(book -> modelMapper.map(book, BookDTO.class))
+                .collect(Collectors.toList());
     }
 }
