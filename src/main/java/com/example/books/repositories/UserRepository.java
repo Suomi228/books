@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     List<UserEntity> findByName(String name);
 
     //     Show every book that user liked
-    @Query(value = "select u, b.book from UserEntity u join BookCollectionEntity b on u.id = b.user.id where u.name in (:name)")
+    @Query(value = "SELECT u FROM UserEntity u WHERE u.name = :name")
     List<UserEntity> findAllByName(@Param("name") String name);
 
 }

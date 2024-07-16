@@ -7,12 +7,16 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@AutoConfiguration
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
     @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/search/{name}")
     public List<UserEntity> getAll(@PathVariable("name") String name) {

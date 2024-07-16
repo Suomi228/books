@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@AutoConfiguration
 @Service
 public class UserService {
     private final UserRepository userRepository;
@@ -21,6 +20,8 @@ public class UserService {
 
 
     public List<UserEntity> findAllByName(String name){
+        List<UserEntity> users = userRepository.findAllByName(name);
+        System.out.println(users);
         return userRepository.findAllByName(name);
     };
 }
