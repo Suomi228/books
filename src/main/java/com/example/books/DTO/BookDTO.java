@@ -5,14 +5,16 @@ import com.example.books.entities.GenreEntity;
 
 public class BookDTO {
 
-    private long id;
+    private Long id;
     private String title;
     private String description;
     private double price;
-    private GenreDTO genre;
-    private AuthorDTO author;
+    private String genre;
+    private String author;
 
-    public BookDTO(long id, String title, String description, double price, GenreDTO genre, AuthorDTO author) {
+    public BookDTO() {}
+
+    public BookDTO(Long id, String title, String description, double price, String genre, String author) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -21,11 +23,11 @@ public class BookDTO {
         this.author = author;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -53,19 +55,19 @@ public class BookDTO {
         this.price = price;
     }
 
-    public GenreDTO getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(GenreDTO genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
-    public AuthorDTO getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(AuthorDTO author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 }
