@@ -3,7 +3,7 @@ package com.example.books.services.impl;
 import com.example.books.DTO.BookDTO;
 import com.example.books.entities.BookEntity;
 import com.example.books.exception.UserNotFoundException;
-import com.example.books.repositories.UserRepository;
+import com.example.books.repositories.BookRepository;
 import com.example.books.services.BookDiscountService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +16,20 @@ import java.util.stream.Collectors;
 public class BookDiscountServiceServiceImpl implements BookDiscountService {
 
     private final ModelMapper modelMapper;
-    private final UserRepository userRepository;
+    private final BookRepository bookRepository;
 
     @Autowired
-    public BookDiscountServiceServiceImpl(ModelMapper modelMapper, UserRepository userRepository) {
+    public BookDiscountServiceServiceImpl(ModelMapper modelMapper, BookRepository bookRepository) {
         this.modelMapper = modelMapper;
-        this.userRepository = userRepository;
+        this.bookRepository = bookRepository;
     }
 
     @Override
-    public List<BookDTO> findDiscountEligibleBooks(Long userId) {
-        if (!userRepository.existsById(userId)) {
+    public List<BookDTO> findDiscountBooks(Long userId) {
+        if (!bookRepository.existsById(userId)) {
             throw new UserNotFoundException(userId);
         }
-        List<BookEntity> eligibleBooks = userRepository.findDiscountEligibleBooks(userId);
+        List<BookEntity> eligibleBooks = bookRepository.findDiscountBooks(userId);
         return eligibleBooks.stream()
                 .map(book -> {
                     BookDTO bookDTO = modelMapper.map(book, BookDTO.class);

@@ -1,5 +1,6 @@
 package com.example.books.services.impl;
 
+import com.example.books.DTO.PurchaseDTO;
 import com.example.books.entities.PurchaseEntity;
 import com.example.books.exception.PurchaseNotFoundException;
 import com.example.books.exception.ReturnPeriodExpiredException;
@@ -27,8 +28,8 @@ public class PurchaseBackServiceImpl implements PurchaseBackService {
 
     @Transactional
     @Override
-    public void deletePurchaseIfWithinThreeDays(Long userId, Long bookId) throws PurchaseNotFoundException, ReturnPeriodExpiredException {
-        PurchaseEntity purchase = purchaseRepository.findByUserIdAndBookId(userId, bookId);
+    public void deletePurchase(Long userId, Long bookId) throws PurchaseNotFoundException, ReturnPeriodExpiredException {
+        PurchaseDTO purchase = purchaseRepository.findByUserIdAndBookId(userId, bookId);
         if (purchase == null) {
             throw new PurchaseNotFoundException("Purchase record not found.");
         }

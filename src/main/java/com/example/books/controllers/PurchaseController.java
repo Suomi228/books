@@ -20,7 +20,7 @@ public class PurchaseController {
     @DeleteMapping("/return")
     public String returnBook(@RequestParam("userId") Long userId, @RequestParam("bookId") Long bookId) {
         try {
-            purchaseBackService.deletePurchaseIfWithinThreeDays(userId, bookId);
+            purchaseBackService.deletePurchase(userId, bookId);
             return "Book returned successfully.";
         } catch (PurchaseNotFoundException e) {
             return e.getMessage();

@@ -1,6 +1,5 @@
 package com.example.books.repositories;
 
-import com.example.books.DTO.BookDTO;
 import com.example.books.entities.BookEntity;
 import com.example.books.entities.UserEntity;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends GenericRepository<UserEntity, Long> {
+public interface BookRepository extends GenericRepository<UserEntity, Long> {
 
     List<UserEntity> findByName(String name);
 
@@ -25,6 +24,6 @@ public interface UserRepository extends GenericRepository<UserEntity, Long> {
             "(SELECT p.book.genre FROM PurchaseEntity p WHERE p.user.id = :userId " +
             "GROUP BY p.book.genre HAVING COUNT(p.book.id) >= 1) " +
             "AND b.id NOT IN (SELECT p.book.id FROM PurchaseEntity p WHERE p.user.id = :userId)")
-    List<BookEntity> findDiscountEligibleBooks(@Param("userId") Long userId);
+    List<BookEntity> findDiscountBooks(@Param("userId") Long userId);
 
 }

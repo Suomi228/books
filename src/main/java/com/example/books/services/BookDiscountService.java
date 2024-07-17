@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface BookDiscountService {
 
-    List<BookDTO> findDiscountEligibleBooks(Long userId);
+    List<BookDTO> findDiscountBooks(Long userId);
 }

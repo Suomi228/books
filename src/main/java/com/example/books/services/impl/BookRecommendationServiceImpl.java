@@ -1,7 +1,7 @@
 package com.example.books.services.impl;
 
 import com.example.books.exception.UserNotFoundException;
-import com.example.books.repositories.UserRepository;
+import com.example.books.repositories.BookRepository;
 import com.example.books.services.BookRecommendationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +13,20 @@ import java.util.List;
 public class BookRecommendationServiceImpl implements BookRecommendationService {
 
     private final ModelMapper modelMapper;
-    private final UserRepository userRepository;
+    private final BookRepository bookRepository;
 
     @Autowired
-    public BookRecommendationServiceImpl(ModelMapper modelMapper, UserRepository userRepository) {
+    public BookRecommendationServiceImpl(ModelMapper modelMapper, BookRepository bookRepository) {
         this.modelMapper = modelMapper;
-        this.userRepository = userRepository;
+        this.bookRepository = bookRepository;
     }
 
     @Override
     public List<String> recommendBooks(Long userId) {
-        if (!userRepository.existsById(userId)) {
+        if (!bookRepository.existsById(userId)) {
             throw new UserNotFoundException(userId);
         }
-        List<String> recommendedBooks = userRepository.recommendBooks(userId);
+        List<String> recommendedBooks = bookRepository.recommendBooks(userId);
         return recommendedBooks;
     }
 }

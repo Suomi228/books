@@ -1,5 +1,6 @@
 package com.example.books.repositories;
 
+import com.example.books.DTO.PurchaseDTO;
 import com.example.books.entities.PurchaseEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,5 +15,5 @@ public interface PurchaseRepository extends GenericRepository<PurchaseEntity, Lo
     @Query("DELETE FROM PurchaseEntity p WHERE p.user.id = :userId AND p.book.id = :bookId")
     void deletePurchaseIfWithinThreeDays(@Param("userId") Long userId, @Param("bookId") Long bookId);
 
-    PurchaseEntity findByUserIdAndBookId(Long userId, Long bookId);
+    PurchaseDTO findByUserIdAndBookId(Long userId, Long bookId);
 }

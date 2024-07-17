@@ -22,11 +22,11 @@ public class BooksController {
     }
 
     @GetMapping("/search/{userID}")
-    public List<String> getAll(@PathVariable("userID") Long userID) {
+    public List<String> getRecommendation(@PathVariable("userID") Long userID) {
         return bookRecommendationServiceImpl.recommendBooks(userID);
     }
     @GetMapping("/discount-eligible-books/{userId}")
-    public List<BookDTO> getDiscountEligibleBooks(@PathVariable("userId") Long userId) {
-        return bookDiscountServiceImpl.findDiscountEligibleBooks(userId);
+    public List<BookDTO> getDiscountBooks(@PathVariable("userId") Long userId) {
+        return bookDiscountServiceImpl.findDiscountBooks(userId);
     }
 }
