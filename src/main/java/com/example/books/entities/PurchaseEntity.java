@@ -1,6 +1,7 @@
 package com.example.books.entities;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -9,11 +10,11 @@ public class PurchaseEntity extends BaseEntity {
 
     private UserEntity user;
     private BookEntity book;
-    private Date purchaseDate;
+    private LocalDate purchaseDate;
 
     protected PurchaseEntity() {}
 
-    protected PurchaseEntity(UserEntity user, BookEntity book, Date purchaseDate) {
+    protected PurchaseEntity(UserEntity user, BookEntity book, LocalDate purchaseDate) {
         this.user = user;
         this.book = book;
         this.purchaseDate = purchaseDate;
@@ -37,12 +38,12 @@ public class PurchaseEntity extends BaseEntity {
         this.book = book;
     }
 
-    public void setPurchaseDate(Date purchaseDate) {
+    public void setPurchaseDate(LocalDate purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
     @Column(name = "purchase_date")
-    public Date getPurchaseDate() {
+    public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
 }
