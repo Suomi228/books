@@ -1,37 +1,10 @@
 package com.example.books.services;
 
 import com.example.books.DTO.BookDTO;
-import com.example.books.entities.BookEntity;
-import com.example.books.repositories.UserRepository;
-import com.example.books.services.impl.BookDiscount;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Service
-public class BookDiscountService implements BookDiscount {
+public interface BookDiscountService {
 
-    private final ModelMapper modelMapper;
-    private final UserRepository userRepository;
-
-    @Autowired
-    public BookDiscountService(ModelMapper modelMapper, UserRepository userRepository) {
-        this.modelMapper = modelMapper;
-        this.userRepository = userRepository;
-    }
-
-    @Override
-    public List<BookDTO> findDiscountEligibleBooks(Long userId) {
-        List<BookEntity> eligibleBooks = userRepository.findDiscountEligibleBooks(userId);
-        return eligibleBooks.stream()
-                .map(book -> {
-                    BookDTO bookDTO = modelMapper.map(book, BookDTO.class);
-                    bookDTO.setPrice(book.getPrice() * 0.75); // Применение 25% скидки
-                    return bookDTO;
-                })
-                .collect(Collectors.toList());
-    }
+    List<BookDTO> findDiscountEligibleBooks(Long userId);
 }

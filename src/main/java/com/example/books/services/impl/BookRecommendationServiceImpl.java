@@ -1,34 +1,31 @@
-package com.example.books.services;
+package com.example.books.services.impl;
 
-
-import com.example.books.DTO.BookDTO;
-import com.example.books.entities.BookEntity;
+import com.example.books.exception.UserNotFoundException;
 import com.example.books.repositories.UserRepository;
-//import com.example.books.repositories.impl.UserEntityRepositoryImpl;
-import com.example.books.services.impl.BookRecommendationService;
+import com.example.books.services.BookRecommendationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class UserService implements BookRecommendationService {
+public class BookRecommendationServiceImpl implements BookRecommendationService {
 
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(ModelMapper modelMapper, UserRepository userRepository) {
+    public BookRecommendationServiceImpl(ModelMapper modelMapper, UserRepository userRepository) {
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
     }
 
     @Override
     public List<String> recommendBooks(Long userId) {
+        if (!userRepository.existsById(userId)) {
+            throw new UserNotFoundException(userId);
+        }
         List<String> recommendedBooks = userRepository.recommendBooks(userId);
         return recommendedBooks;
     }
