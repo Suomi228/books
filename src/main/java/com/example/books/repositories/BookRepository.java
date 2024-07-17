@@ -14,8 +14,9 @@ public interface BookRepository extends GenericRepository<UserEntity, Long> {
     List<UserEntity> findByName(String name);
 
     //  Show every book that user liked
-    @Query("SELECT b.title FROM BookEntity b WHERE b.genre IN " +
-            "(SELECT bc.book.genre FROM BookCollectionEntity bc WHERE bc.user.id = :userId) " +
+    @Query("SELECT b.title FROM BookEntity b WHERE b.genre = " +
+            "(SELECT bc.book.genre FROM BookCollectionEntity bc WHERE bc.user.id = :userId " +
+            "GROUP BY bc.book.genre ORDER BY COUNT(bc.book.id) DESC LIMIT 1) " +
             "AND b NOT IN (SELECT bc.book FROM BookCollectionEntity bc WHERE bc.user.id = :userId) " +
             "ORDER BY b.id")
     List<String> recommendBooks(@Param("userId") Long userId);
